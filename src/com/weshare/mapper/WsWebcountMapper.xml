@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsWebcountMapper" >
+  <resultMap id="BaseResultMap" type="com.weshare.pojo.WsWebcount" >
+    <result column="datatime" property="datatime" jdbcType="VARCHAR" />
+    <result column="clicks" property="clicks" jdbcType="BIGINT" />
+    <result column="registernums" property="registernums" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    datatime, clicks, registernums
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.weshare.pojo.WsWebcountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ws_webcount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.weshare.pojo.WsWebcountExample" >
+    delete from ws_webcount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weshare.pojo.WsWebcount" >
+    insert into ws_webcount (datatime, clicks, registernums
+      )
+    values (#{datatime,jdbcType=VARCHAR}, #{clicks,jdbcType=BIGINT}, #{registernums,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.pojo.WsWebcount" >
+    insert into ws_webcount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="datatime != null" >
+        datatime,
+      </if>
+      <if test="clicks != null" >
+        clicks,
+      </if>
+      <if test="registernums != null" >
+        registernums,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="datatime != null" >
+        #{datatime,jdbcType=VARCHAR},
+      </if>
+      <if test="clicks != null" >
+        #{clicks,jdbcType=BIGINT},
+      </if>
+      <if test="registernums != null" >
+        #{registernums,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weshare.pojo.WsWebcountExample" resultType="java.lang.Integer" >
+    select count(*) from ws_webcount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ws_webcount
+    <set >
+      <if test="record.datatime != null" >
+        datatime = #{record.datatime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clicks != null" >
+        clicks = #{record.clicks,jdbcType=BIGINT},
+      </if>
+      <if test="record.registernums != null" >
+        registernums = #{record.registernums,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ws_webcount
+    set datatime = #{record.datatime,jdbcType=VARCHAR},
+      clicks = #{record.clicks,jdbcType=BIGINT},
+      registernums = #{record.registernums,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

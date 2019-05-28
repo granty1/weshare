@@ -1,0 +1,122 @@
+body{background: #f4f4f4;}
+.content
+{
+  margin: 0 auto;
+
+  height: auto;
+}
+.mainin
+{
+  float: left;
+  width: 100%;
+
+  padding: 10px;
+
+
+
+
+}
+
+/* .mainright
+{
+  float: left;
+  width: 34%;
+
+  padding: 10px;
+
+} */
+.mymain
+{
+  width: 1024px;
+  /* border: 1px solid black; */
+  margin:0 auto;
+
+
+}
+.title
+{
+  color:black;
+
+  margin-bottom: 10px;
+}
+.oneset
+{
+  height:300px;
+  clear: both;
+
+}
+.myleft
+{
+  float:left;
+}
+.myarticle{
+  height: 150px;
+  width: 200px;
+  margin:auto 10px;
+  margin-left: 32px;
+
+}
+.tuijian
+{
+  height: 250px;
+
+  width: 300px;
+  margin-left: 25px;
+
+}
+.clear
+{
+  clear:both;
+}
+.zuozhe
+{
+  font-size: 20px;
+}
+.mycolor
+{
+  background: #fff;
+}
+.mousecursor{
+  cursor: pointer;
+}
+.box {
+	
+    width: 240px;
+    height: 1000px;
+    line-height: 25px;
+    border:0px;
+    overflow: hidden;
+    margin-left: 10px;
+    
+}
+
+.box ul {
+    margin: 0;
+    padding: 0
+
+}
+
+.box li {
+    height: 30px;
+    line-height: 30px;
+    line-width: 50px;
+    font-size: 20px;
+    text-align: center;
+    list-style-type: none;
+}
+.top-15{
+
+ 
+}
+.top-man{
+  margin-left: 20px;
+  margin-top: 67px;
+}
+/* header{
+      border-bottom: 1px solid #d8dde4
+} */
+.title{
+  font-size:20px;
+  font-weight:300;
+  margin-right:70px;
+}

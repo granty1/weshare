@@ -1,0 +1,70 @@
+.coll1{
+  cursor: pointer;
+}
+
+.guanzhu{
+  width:40%;
+  height: 35px;
+  font-size: 15px;
+
+  margin-right: 10px;
+}
+.mybtn{
+  border-radius: 3px;
+  border: 0px;
+}
+.mybtn2{
+  border-radius: 3px;
+  border: 1px solid #36a3eb;
+  background-color: #fff;
+  color: #36a3eb;
+
+
+
+}
+.mybtn10{
+  border-radius: 3px;
+  border: 1px solid #36a3eb;
+  background-color: #fff;
+  color: #36a3eb;
+  margin-left:50px;
+
+
+
+}
+.mybtn2:hover{
+  background-color: #36a3eb;
+  color: #fff;
+  opacity:0.5;
+
+
+
+}
+.mybtn10:hover{
+  background-color: #36a3eb;
+  color: #fff;
+  opacity:0.5;
+
+
+
+}
+.mybtn:hover{
+  opacity:0.8;
+  filter: grayscale(100%);
+-webkit-filter: grayscale(0%);
+-moz-filter: grayscale(0%);
+-ms-filter: grayscale(0%);
+-o-filter: grayscale(0%);
+}
+.boderline{
+  border-top: 1px #e1e4e8 solid;
+}
+#ul_se img:hover{
+  opacity:0.5;
+}
+.myclear{
+  clear:both;
+}
+.d-none{
+  display:none;
+}

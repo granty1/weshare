@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsFrozenMapper" >
+  <resultMap id="BaseResultMap" type="com.weshare.pojo.WsFrozen" >
+    <id column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="f_cause" property="fCause" jdbcType="VARCHAR" />
+    <result column="f_ctime" property="fCtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    u_id, f_cause, f_ctime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.weshare.pojo.WsFrozenExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ws_frozen
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ws_frozen
+    where u_id = #{uId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ws_frozen
+    where u_id = #{uId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.weshare.pojo.WsFrozenExample" >
+    delete from ws_frozen
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weshare.pojo.WsFrozen" >
+    insert into ws_frozen (u_id, f_cause, f_ctime
+      )
+    values (#{uId,jdbcType=BIGINT}, #{fCause,jdbcType=VARCHAR}, #{fCtime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.pojo.WsFrozen" >
+    insert into ws_frozen
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="fCause != null" >
+        f_cause,
+      </if>
+      <if test="fCtime != null" >
+        f_ctime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="fCause != null" >
+        #{fCause,jdbcType=VARCHAR},
+      </if>
+      <if test="fCtime != null" >
+        #{fCtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weshare.pojo.WsFrozenExample" resultType="java.lang.Integer" >
+    select count(*) from ws_frozen
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ws_frozen
+    <set >
+      <if test="record.uId != null" >
+        u_id = #{record.uId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fCause != null" >
+        f_cause = #{record.fCause,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fCtime != null" >
+        f_ctime = #{record.fCtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ws_frozen
+    set u_id = #{record.uId,jdbcType=BIGINT},
+      f_cause = #{record.fCause,jdbcType=VARCHAR},
+      f_ctime = #{record.fCtime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.pojo.WsFrozen" >
+    update ws_frozen
+    <set >
+      <if test="fCause != null" >
+        f_cause = #{fCause,jdbcType=VARCHAR},
+      </if>
+      <if test="fCtime != null" >
+        f_ctime = #{fCtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.pojo.WsFrozen" >
+    update ws_frozen
+    set f_cause = #{fCause,jdbcType=VARCHAR},
+      f_ctime = #{fCtime,jdbcType=VARCHAR}
+    where u_id = #{uId,jdbcType=BIGINT}
+  </update>
+</mapper>

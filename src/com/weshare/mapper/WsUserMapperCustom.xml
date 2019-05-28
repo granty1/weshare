@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsUserMapperCustom">
+
+	<sql id="finduser_sql_where">
+		<if test="username!=null and username!=''">
+			u.username like '%#{username}%'
+		</if>
+	</sql>
+ 
+ <select id="getTop8User" resultType="com.weshare.pojo.WsUser">
+ 	SELECT
+	u.username username,
+	u.u_head uHead
+FROM
+	ws_user u
+ORDER BY
+	u_integral DESC
+LIMIT 0,8
+ </select>
+ 
+ <select id="findManagerUser"  resultType="com.weshare.pojo.WsUserCustom">
+SELECT
+	u.username,
+	(
+		SELECT
+			count(*)
+		FROM
+			ws_file
+		WHERE
+			ws_file.u_id = u.u_id
+	) filenum,
+	(
+		SELECT
+			count(*)
+		FROM
+			ws_article
+		WHERE
+			ws_article.user_id = u.u_id
+	) articlenum,
+  u.u_integral integral
+FROM
+	ws_user u
+ </select>
+ <select id="findManagerUserByTj" parameterType="String" resultType="com.weshare.pojo.WsUserCustom">
+ 	SELECT
+ 	u.u_id id,
+	u.username,
+	(
+		SELECT
+			count(*)
+		FROM
+			ws_file
+		WHERE
+			ws_file.u_id = u.u_id
+	) filenum,
+	(
+		SELECT
+			count(*)
+		FROM
+			ws_article
+		WHERE
+			ws_article.user_id = u.u_id
+	) articlenum,
+  u.u_integral integral
+FROM
+	ws_user u
+where u.username like '%${value}%'
+
+and u.u_status='1'
+ 	
+ </select>
+ 
+</mapper>

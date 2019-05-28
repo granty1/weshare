@@ -1,0 +1,64 @@
+.mybubble{
+　　
+　　　　width:200px;
+       min-height:100px;
+       height: auto;
+       background-color: #fff;
+　　　　margin-left: 200px;
+        border-radius:4px;
+       -moz-border-radius:20px;
+　　　 -webkit-border-radius:20px;
+       border: 1px solid #d8dde4;
+　　　　
+
+
+}
+.test1{
+  transform:rotate(45deg);
+  -ms-transform:rotate(45deg); 	/* IE 9 */
+  -moz-transform:rotate(45deg); 	/* Firefox */
+  -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+  -o-transform:rotate(45deg);
+  background-color: #fff;
+  position: relative;
+  z-index: 999;
+  width:10px;
+
+  height:10px;
+  left:-6px;
+  top:20px;
+  border-left:  1px solid #d8dde4;
+  border-bottom:   1px solid #d8dde4;
+
+  /* border-style:solid;
+  border-color: transparent transparent  #d8dde4 #d8dde4 #d8dde4; */
+
+
+}
+
+.test{
+
+ width:0;
+ height:0;
+ border-width:12px;
+ border-style:solid;
+ border-color:transparent #fff transparent transparent;
+ font-size:0;
+ line-height:0;
+ z-index: 999;
+ position: absolute;
+ left:90px;
+ top:20px;
+
+
+
+}
+
+/* #test{width:0; height:0; border-width:75px; border-style:solid; border-color:#09F #990 #933 #0C9;} */
+
+.main-top{
+  margin:10px auto;
+
+
+  /* height: 200px; */
+}

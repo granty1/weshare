@@ -1,0 +1,22 @@
+.infomain{
+  width:auto;
+  height: auto;
+}
+.main-center{
+  width: 1070px;
+  height: auto;
+  margin:40px auto;
+}
+.info-change{
+  width:250px;
+  height: auto;
+  margin-right: 20px;
+}
+.change{
+  width:800px;
+  height:auto;
+}
+.btn-size6{
+  width: 100px;
+
+}

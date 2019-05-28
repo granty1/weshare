@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsFileMapperCustom" >
+  
+  <select id="findFileManagerList" parameterType="com.weshare.pojo.WsFileCustom" 
+  resultType="com.weshare.pojo.WsFileCustom">
+SELECT
+	f.f_id fileid,
+	f.f_title filetitle,
+	f.f_name filename,
+	f.f_kind filekind,
+	f.f_downnum downnum,
+	(
+		SELECT
+			u.username
+		FROM
+			ws_user u
+		WHERE
+			f.u_id = u.u_id
+	) authorname
+FROM
+	ws_file f
+where f.f_status='1'  
+<if test="filetitle!=null and filetitle!=''">
+and f.f_title like '%${filetitle}%'
+</if>
+<if test="filename!=null and filename!=''">
+and f.f_name like '%${filename}%'
+</if>
+<if test="filekind!=null and filekind!=''">
+and f.f_kind = '${filekind}'
+</if>
+  </select>
+  
+  <select id="findFilePassList" parameterType="com.weshare.pojo.WsFileCustom" 
+  resultType="com.weshare.pojo.WsFileCustom">
+SELECT
+	f.f_id fileid,
+	f.f_title filetitle,
+	f.f_name filename,
+	f.f_kind filekind,
+	(
+		SELECT
+			u.username
+		FROM
+			ws_user u
+		WHERE
+			f.u_id = u.u_id
+	) authorname
+FROM
+	ws_file f
+where f.f_status='2'
+<if test="filetitle!=null and filetitle!=''">
+and f.f_title like '%${filetitle}%'
+</if>
+<if test="filename!=null and filename!=''">
+and f.f_name like '%${filename}%'
+</if>
+<if test="filekind!=null and filekind!=''">
+and f.f_kind = '${filekind}'
+</if>
+  		
+  </select>
+  
+</mapper>

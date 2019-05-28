@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsPriletterMapper" >
+  <resultMap id="BaseResultMap" type="com.weshare.pojo.WsPriletter" >
+    <id column="p_id" property="pId" jdbcType="BIGINT" />
+    <result column="p_addre" property="pAddre" jdbcType="BIGINT" />
+    <result column="p_reci" property="pReci" jdbcType="BIGINT" />
+    <result column="p_title" property="pTitle" jdbcType="VARCHAR" />
+    <result column="p_text" property="pText" jdbcType="VARCHAR" />
+    <result column="p_creat" property="pCreat" jdbcType="VARCHAR" />
+    <result column="p_status" property="pStatus" jdbcType="VARCHAR" />
+    <result column="p_type" property="pType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    p_id, p_addre, p_reci, p_title, p_text, p_creat, p_status, p_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.weshare.pojo.WsPriletterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ws_priletter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by p_creat desc
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ws_priletter
+    where p_id = #{pId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ws_priletter
+    where p_id = #{pId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.weshare.pojo.WsPriletterExample" >
+    delete from ws_priletter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weshare.pojo.WsPriletter" >
+    insert into ws_priletter (p_id, p_addre, p_reci, 
+      p_title, p_text, p_creat, 
+      p_status, p_type)
+    values (#{pId,jdbcType=BIGINT}, #{pAddre,jdbcType=BIGINT}, #{pReci,jdbcType=BIGINT}, 
+      #{pTitle,jdbcType=VARCHAR}, #{pText,jdbcType=VARCHAR}, #{pCreat,jdbcType=VARCHAR}, 
+      #{pStatus,jdbcType=VARCHAR}, #{pType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.pojo.WsPriletter" >
+    insert into ws_priletter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="pAddre != null" >
+        p_addre,
+      </if>
+      <if test="pReci != null" >
+        p_reci,
+      </if>
+      <if test="pTitle != null" >
+        p_title,
+      </if>
+      <if test="pText != null" >
+        p_text,
+      </if>
+      <if test="pCreat != null" >
+        p_creat,
+      </if>
+      <if test="pStatus != null" >
+        p_status,
+      </if>
+      <if test="pType != null" >
+        p_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pId != null" >
+        #{pId,jdbcType=BIGINT},
+      </if>
+      <if test="pAddre != null" >
+        #{pAddre,jdbcType=BIGINT},
+      </if>
+      <if test="pReci != null" >
+        #{pReci,jdbcType=BIGINT},
+      </if>
+      <if test="pTitle != null" >
+        #{pTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pText != null" >
+        #{pText,jdbcType=VARCHAR},
+      </if>
+      <if test="pCreat != null" >
+        #{pCreat,jdbcType=VARCHAR},
+      </if>
+      <if test="pStatus != null" >
+        #{pStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        #{pType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weshare.pojo.WsPriletterExample" resultType="java.lang.Integer" >
+    select count(*) from ws_priletter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  
+  <!-- 自定一查询，查询该用户下状态码为1的所有私信， -->
+    <select id="selectLetterByStatus" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        SELECT * from ws_priletter where p_reci=#{pReci,jdbcType=BIGINT} and p_status = 1
+    </select>
+  
+  
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ws_priletter
+    <set >
+      <if test="record.pId != null" >
+        p_id = #{record.pId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pAddre != null" >
+        p_addre = #{record.pAddre,jdbcType=BIGINT},
+      </if>
+      <if test="record.pReci != null" >
+        p_reci = #{record.pReci,jdbcType=BIGINT},
+      </if>
+      <if test="record.pTitle != null" >
+        p_title = #{record.pTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pText != null" >
+        p_text = #{record.pText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pCreat != null" >
+        p_creat = #{record.pCreat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pStatus != null" >
+        p_status = #{record.pStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pType != null" >
+        p_type = #{record.pType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ws_priletter
+    set p_id = #{record.pId,jdbcType=BIGINT},
+      p_addre = #{record.pAddre,jdbcType=BIGINT},
+      p_reci = #{record.pReci,jdbcType=BIGINT},
+      p_title = #{record.pTitle,jdbcType=VARCHAR},
+      p_text = #{record.pText,jdbcType=VARCHAR},
+      p_creat = #{record.pCreat,jdbcType=VARCHAR},
+      p_status = #{record.pStatus,jdbcType=VARCHAR},
+      p_type = #{record.pType,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.pojo.WsPriletter" >
+    update ws_priletter
+    <set >
+      <if test="pAddre != null" >
+        p_addre = #{pAddre,jdbcType=BIGINT},
+      </if>
+      <if test="pReci != null" >
+        p_reci = #{pReci,jdbcType=BIGINT},
+      </if>
+      <if test="pTitle != null" >
+        p_title = #{pTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="pText != null" >
+        p_text = #{pText,jdbcType=VARCHAR},
+      </if>
+      <if test="pCreat != null" >
+        p_creat = #{pCreat,jdbcType=VARCHAR},
+      </if>
+      <if test="pStatus != null" >
+        p_status = #{pStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="pType != null" >
+        p_type = #{pType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.pojo.WsPriletter" >
+    update ws_priletter
+    set p_addre = #{pAddre,jdbcType=BIGINT},
+      p_reci = #{pReci,jdbcType=BIGINT},
+      p_title = #{pTitle,jdbcType=VARCHAR},
+      p_text = #{pText,jdbcType=VARCHAR},
+      p_creat = #{pCreat,jdbcType=VARCHAR},
+      p_status = #{pStatus,jdbcType=VARCHAR},
+      p_type = #{pType,jdbcType=VARCHAR}
+    where p_id = #{pId,jdbcType=BIGINT}
+  </update>
+</mapper>

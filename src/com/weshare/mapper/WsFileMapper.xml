@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsFileMapper" >
+  <resultMap id="BaseResultMap" type="com.weshare.pojo.WsFile" >
+    <id column="f_id" property="fId" jdbcType="BIGINT" />
+    <result column="u_id" property="uId" jdbcType="BIGINT" />
+    <result column="f_name" property="fName" jdbcType="VARCHAR" />
+    <result column="f_title" property="fTitle" jdbcType="VARCHAR" />
+    <result column="f_size" property="fSize" jdbcType="DOUBLE" />
+    <result column="f_desc" property="fDesc" jdbcType="VARCHAR" />
+    <result column="f_integral" property="fIntegral" jdbcType="INTEGER" />
+    <result column="f_creat" property="fCreat" jdbcType="VARCHAR" />
+    <result column="f_kind" property="fKind" jdbcType="VARCHAR" />
+    <result column="f_path" property="fPath" jdbcType="VARCHAR" />
+    <result column="f_status" property="fStatus" jdbcType="INTEGER" />
+    <result column="f_downnum" property="fDownnum" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    f_id, u_id, f_name, f_title, f_size, f_desc, f_integral, f_creat, f_kind, f_path, 
+    f_status, f_downnum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.weshare.pojo.WsFileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ws_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  
+
+    <!-- 自定义模糊查询 -->
+    <select id="selectByKeyWord" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    SELECT * FROM ws_file WHERE f_title LIKE '%${value}%' and f_status='1'
+  </select>
+
+
+   <!-- 查询分页文件资源对象 -->
+  <select id="selectAllFileByPage" resultMap="BaseResultMap" parameterType="java.lang.Long">
+     SELECT
+	*
+FROM
+	ws_file
+WHERE
+	f_status = '1'
+ORDER BY
+	f_creat DESC
+LIMIT ${value},
+ 10
+  </select>
+  
+     <!-- 查询所有文件资源对象 -->
+  <select id="selectAllFile" resultMap="BaseResultMap" >
+      select * from ws_file ORDER BY f_creat DESC  
+  </select>
+  
+  <!-- 查询top3下载量文件资源对象 -->
+  <select id="selectTop3File" resultMap="BaseResultMap">
+  
+      select * from ws_file ORDER BY f_downnum DESC limit 1,14     
+  </select>
+
+
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ws_file
+    where f_id = #{fId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ws_file
+    where f_id = #{fId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.weshare.pojo.WsFileExample" >
+    delete from ws_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.weshare.pojo.WsFile" >
+    insert into ws_file (f_id, u_id, f_name, 
+      f_title, f_size, f_desc, 
+      f_integral, f_creat, f_kind, 
+      f_path, f_status, f_downnum
+      )
+    values (#{fId,jdbcType=BIGINT}, #{uId,jdbcType=BIGINT}, #{fName,jdbcType=VARCHAR}, 
+      #{fTitle,jdbcType=VARCHAR}, #{fSize,jdbcType=DOUBLE}, #{fDesc,jdbcType=VARCHAR}, 
+      #{fIntegral,jdbcType=INTEGER}, #{fCreat,jdbcType=VARCHAR}, #{fKind,jdbcType=VARCHAR}, 
+      #{fPath,jdbcType=VARCHAR}, #{fStatus,jdbcType=INTEGER}, #{fDownnum,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.weshare.pojo.WsFile" >
+    insert into ws_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="fName != null" >
+        f_name,
+      </if>
+      <if test="fTitle != null" >
+        f_title,
+      </if>
+      <if test="fSize != null" >
+        f_size,
+      </if>
+      <if test="fDesc != null" >
+        f_desc,
+      </if>
+      <if test="fIntegral != null" >
+        f_integral,
+      </if>
+      <if test="fCreat != null" >
+        f_creat,
+      </if>
+      <if test="fKind != null" >
+        f_kind,
+      </if>
+      <if test="fPath != null" >
+        f_path,
+      </if>
+      <if test="fStatus != null" >
+        f_status,
+      </if>
+      <if test="fDownnum != null" >
+        f_downnum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=BIGINT},
+      </if>
+      <if test="uId != null" >
+        #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="fName != null" >
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fTitle != null" >
+        #{fTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fSize != null" >
+        #{fSize,jdbcType=DOUBLE},
+      </if>
+      <if test="fDesc != null" >
+        #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fIntegral != null" >
+        #{fIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="fCreat != null" >
+        #{fCreat,jdbcType=VARCHAR},
+      </if>
+      <if test="fKind != null" >
+        #{fKind,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null" >
+        #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null" >
+        #{fStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fDownnum != null" >
+        #{fDownnum,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.weshare.pojo.WsFileExample" resultType="java.lang.Integer" >
+    select count(*) from ws_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ws_file
+    <set >
+      <if test="record.fId != null" >
+        f_id = #{record.fId,jdbcType=BIGINT},
+      </if>
+      <if test="record.uId != null" >
+        u_id = #{record.uId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fName != null" >
+        f_name = #{record.fName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fTitle != null" >
+        f_title = #{record.fTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fSize != null" >
+        f_size = #{record.fSize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fDesc != null" >
+        f_desc = #{record.fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fIntegral != null" >
+        f_integral = #{record.fIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.fCreat != null" >
+        f_creat = #{record.fCreat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fKind != null" >
+        f_kind = #{record.fKind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fPath != null" >
+        f_path = #{record.fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fStatus != null" >
+        f_status = #{record.fStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDownnum != null" >
+        f_downnum = #{record.fDownnum,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ws_file
+    set f_id = #{record.fId,jdbcType=BIGINT},
+      u_id = #{record.uId,jdbcType=BIGINT},
+      f_name = #{record.fName,jdbcType=VARCHAR},
+      f_title = #{record.fTitle,jdbcType=VARCHAR},
+      f_size = #{record.fSize,jdbcType=DOUBLE},
+      f_desc = #{record.fDesc,jdbcType=VARCHAR},
+      f_integral = #{record.fIntegral,jdbcType=INTEGER},
+      f_creat = #{record.fCreat,jdbcType=VARCHAR},
+      f_kind = #{record.fKind,jdbcType=VARCHAR},
+      f_path = #{record.fPath,jdbcType=VARCHAR},
+      f_status = #{record.fStatus,jdbcType=INTEGER},
+      f_downnum = #{record.fDownnum,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.weshare.pojo.WsFile" >
+    update ws_file
+    <set >
+      <if test="uId != null" >
+        u_id = #{uId,jdbcType=BIGINT},
+      </if>
+      <if test="fName != null" >
+        f_name = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fTitle != null" >
+        f_title = #{fTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="fSize != null" >
+        f_size = #{fSize,jdbcType=DOUBLE},
+      </if>
+      <if test="fDesc != null" >
+        f_desc = #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fIntegral != null" >
+        f_integral = #{fIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="fCreat != null" >
+        f_creat = #{fCreat,jdbcType=VARCHAR},
+      </if>
+      <if test="fKind != null" >
+        f_kind = #{fKind,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null" >
+        f_path = #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null" >
+        f_status = #{fStatus,jdbcType=INTEGER},
+      </if>
+      <if test="fDownnum != null" >
+        f_downnum = #{fDownnum,jdbcType=BIGINT},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.weshare.pojo.WsFile" >
+    update ws_file
+    set u_id = #{uId,jdbcType=BIGINT},
+      f_name = #{fName,jdbcType=VARCHAR},
+      f_title = #{fTitle,jdbcType=VARCHAR},
+      f_size = #{fSize,jdbcType=DOUBLE},
+      f_desc = #{fDesc,jdbcType=VARCHAR},
+      f_integral = #{fIntegral,jdbcType=INTEGER},
+      f_creat = #{fCreat,jdbcType=VARCHAR},
+      f_kind = #{fKind,jdbcType=VARCHAR},
+      f_path = #{fPath,jdbcType=VARCHAR},
+      f_status = #{fStatus,jdbcType=INTEGER},
+      f_downnum = #{fDownnum,jdbcType=BIGINT}
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+</mapper>

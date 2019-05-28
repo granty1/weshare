@@ -1,0 +1,34 @@
+.letter-main{
+  margin:30px auto;
+  width: 630px;
+  height: auto;
+}
+.letter-size1{
+  width: 642px;
+  height: 200px;
+  resize: none;
+}
+.letterbtn{
+  width:110px;
+  height: 30px;
+}
+.letterbtn1{
+  width:110px;
+  height: 30px;
+}
+.letter-tiile{
+  font-size: 15px;
+  font-weight: 600;
+}
+.letter-tiile-content{
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 20px;
+
+}
+.letter-content{
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 20px;
+
+}

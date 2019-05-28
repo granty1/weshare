@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weshare.mapper.WsWebcountMapperCustom" >
+  <select id="findWebCount" parameterType="String"
+  resultType="com.weshare.pojo.WsWebCountCustom">
+SELECT
+	w.clicks ,
+	w.datatime,
+	w.registernums
+FROM
+	ws_webcount w
+where w.datatime>='${value}'
+ORDER BY
+	w.datatime 
+  </select>
+  
+  <select id="findCountByOccu"   resultType="com.weshare.pojo.Num">
+SELECT
+	u_occu AS occu,
+	COUNT(*) AS num
+FROM
+	ws_user
+GROUP BY
+	u_occu
+  </select>
+  
+  <select id="findCountByFileKind" resultType="com.weshare.pojo.Num">
+  	SELECT
+	f.f_kind AS filekind,
+	COUNT(*) AS num
+FROM
+	ws_file f
+GROUP BY
+	f.f_kind
+  </select>
+</mapper>
